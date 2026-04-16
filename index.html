@@ -3,58 +3,44 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tutoriais CRM — Media Growth</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Barlow:wght@700;800;900&display=swap" rel="stylesheet">
+<title>Tutoriais CRM</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --bg-deep: #0a0a0a;
-    --bg-card: #131313;
-    --bg-card2: #1a1a1a;
-    --bg-surface: #222222;
+    --bg: #0a0a0a;
+    --card: #131313;
     --orange: #E86B2A;
-    --orange-light: #F08040;
-    --orange-dark: #C4551A;
-    --orange-muted: rgba(232, 107, 42, 0.15);
-    --white: #f0ede6;
-    --gray: #888880;
-    --gray-light: #aaa89e;
+    --orange-muted: rgba(232,107,42,0.12);
     --border: rgba(255,255,255,0.07);
-    --border-orange: rgba(232, 107, 42, 0.3);
+    --border-orange: rgba(232,107,42,0.28);
+    --white: #f0ede6;
+    --gray: #666;
   }
 
   body {
     font-family: 'DM Sans', sans-serif;
-    background: var(--bg-deep);
+    background: var(--bg);
     color: var(--white);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 48px;
+    padding: 40px 24px;
   }
 
-  /* ── HEADER ── */
-  header {
-    padding: 28px 32px 24px;
-    border-bottom: 0.5px solid var(--border);
+  /* logo */
+  .logo {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-  }
-
-  .logo-badge {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background: var(--bg-card);
-    border: 0.5px solid var(--border-orange);
-    border-radius: 8px;
-    padding: 9px 16px;
+    gap: 9px;
   }
 
   .logo-dot {
-    width: 10px; height: 10px;
+    width: 9px; height: 9px;
     background: var(--orange);
     border-radius: 50%;
     box-shadow: 0 0 0 3px var(--orange-muted);
@@ -62,326 +48,93 @@
   }
 
   .logo-text {
-    font-family: 'DM Sans', sans-serif;
     font-weight: 600;
-    font-size: 15px;
-    color: var(--white);
-    letter-spacing: -0.3px;
-  }
-
-  .header-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: var(--orange-muted);
-    border: 0.5px solid var(--border-orange);
-    border-radius: 4px;
-    padding: 4px 12px;
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--orange);
-    letter-spacing: 0.07em;
-    text-transform: uppercase;
-  }
-
-  /* ── HERO ── */
-  .hero {
-    padding: 56px 32px 48px;
-    border-bottom: 0.5px solid var(--border);
-  }
-
-  .hero-label {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--orange);
-    margin-bottom: 14px;
-  }
-
-  .hero h1 {
-    font-family: 'Barlow', sans-serif;
-    font-weight: 900;
-    font-size: clamp(32px, 6vw, 54px);
-    line-height: 1.0;
-    letter-spacing: -0.5px;
-    text-transform: uppercase;
-    color: var(--white);
-    margin-bottom: 16px;
-  }
-
-  .hero h1 span {
-    color: var(--orange);
-  }
-
-  .hero p {
     font-size: 14px;
-    color: var(--gray-light);
-    line-height: 1.65;
-    max-width: 480px;
+    color: var(--white);
+    letter-spacing: -0.2px;
   }
 
-  /* ── GRID ── */
-  .tutorials-section {
-    padding: 40px 32px 64px;
-    flex: 1;
-  }
-
-  .section-label {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--orange);
-    margin-bottom: 20px;
-  }
-
-  .tutorials-grid {
+  /* grid */
+  .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 16px;
+    grid-template-columns: repeat(2, 200px);
+    gap: 12px;
   }
 
-  /* ── TUTORIAL CARD ── */
-  .tutorial-card {
-    background: var(--bg-card);
+  /* card */
+  .card {
+    background: var(--card);
     border: 0.5px solid var(--border);
     border-radius: 12px;
-    padding: 28px 24px;
-    cursor: pointer;
+    padding: 24px 20px;
     text-decoration: none;
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    position: relative;
-    overflow: hidden;
-    transition: border-color 0.2s, background 0.2s, transform 0.15s;
+    align-items: flex-start;
+    gap: 12px;
+    transition: border-color 0.18s, transform 0.15s;
   }
 
-  .tutorial-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse at top left, var(--orange-muted), transparent 65%);
-    opacity: 0;
-    transition: opacity 0.25s;
-  }
-
-  .tutorial-card:hover {
+  .card:hover {
     border-color: var(--border-orange);
-    background: var(--bg-card2);
     transform: translateY(-2px);
   }
 
-  .tutorial-card:hover::before {
-    opacity: 1;
-  }
-
-  /* coming soon state */
-  .tutorial-card.coming-soon {
-    opacity: 0.5;
-    cursor: default;
+  .card.disabled {
+    opacity: 0.38;
     pointer-events: none;
   }
 
-  .card-top {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    position: relative;
-    z-index: 1;
-  }
-
   .card-icon {
-    width: 44px; height: 44px;
-    border-radius: 10px;
-    background: var(--orange-muted);
-    border: 0.5px solid var(--border-orange);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
+    font-size: 22px;
   }
 
-  .card-badge {
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 3px 9px;
-    border-radius: 4px;
-  }
-
-  .badge-live {
-    background: rgba(34, 197, 94, 0.12);
-    border: 0.5px solid rgba(34, 197, 94, 0.3);
-    color: #4ade80;
-  }
-
-  .badge-soon {
-    background: var(--bg-surface);
-    border: 0.5px solid var(--border);
-    color: var(--gray);
-  }
-
-  .card-body {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    position: relative;
-    z-index: 1;
-  }
-
-  .card-title {
-    font-family: 'Barlow', sans-serif;
-    font-weight: 800;
-    font-size: 20px;
-    text-transform: uppercase;
-    letter-spacing: -0.2px;
-    color: var(--white);
-    line-height: 1.1;
-  }
-
-  .card-desc {
+  .card-label {
     font-size: 13px;
-    color: var(--gray-light);
-    line-height: 1.6;
+    font-weight: 600;
+    color: var(--white);
+    letter-spacing: -0.1px;
   }
 
-  .card-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: relative;
-    z-index: 1;
-  }
-
-  .card-meta {
+  .card-sub {
     font-size: 11px;
     color: var(--gray);
     letter-spacing: 0.04em;
   }
 
-  .card-arrow {
-    width: 32px; height: 32px;
-    border-radius: 6px;
-    background: var(--bg-surface);
-    border: 0.5px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.2s, border-color 0.2s;
-  }
-
-  .tutorial-card:hover .card-arrow {
-    background: var(--orange);
-    border-color: var(--orange);
-  }
-
-  .card-arrow svg {
-    width: 14px; height: 14px;
-    stroke: var(--gray-light);
-    transition: stroke 0.2s;
-  }
-
-  .tutorial-card:hover .card-arrow svg {
-    stroke: #fff;
-  }
-
-  /* ── FOOTER ── */
-  footer {
-    padding: 20px 32px;
-    border-top: 0.5px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .footer-text {
-    font-size: 12px;
+  /* footer */
+  .footer {
+    font-size: 11px;
     color: var(--gray);
-    letter-spacing: 0.04em;
-  }
-
-  .footer-dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--orange);
-    box-shadow: 0 0 0 2px var(--orange-muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
   }
 </style>
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header>
-    <div class="logo-badge">
-      <div class="logo-dot"></div>
-      <span class="logo-text">Media Growth</span>
+  <div class="logo">
+    <div class="logo-dot"></div>
+    <span class="logo-text">Media Growth</span>
+  </div>
+
+  <div class="grid">
+
+    <a class="card" href="loom-conversas.html">
+      <div class="card-icon">💬</div>
+      <div class="card-label">Conversas</div>
+      <div class="card-sub">Ver tutorial →</div>
+    </a>
+
+    <div class="card disabled">
+      <div class="card-icon">📊</div>
+      <div class="card-label">Oportunidades</div>
+      <div class="card-sub">Em breve</div>
     </div>
-    <div class="header-tag">CRM Tutoriais</div>
-  </header>
 
-  <!-- HERO -->
-  <section class="hero">
-    <p class="hero-label">Central de tutoriais</p>
-    <h1>Aprenda o<br><span>CRM</span><br>do jeito certo.</h1>
-    <p>Tutoriais rápidos e práticos para dominar cada módulo do sistema. Clique em um módulo para assistir.</p>
-  </section>
+  </div>
 
-  <!-- GRID DE TUTORIAIS -->
-  <section class="tutorials-section">
-    <p class="section-label">Módulos disponíveis</p>
-    <div class="tutorials-grid">
-
-      <!-- CONVERSAS -->
-      <a class="tutorial-card" href="loom-conversas.html">
-        <div class="card-top">
-          <div class="card-icon">💬</div>
-          <span class="card-badge badge-live">Disponível</span>
-        </div>
-        <div class="card-body">
-          <div class="card-title">Conversas</div>
-          <div class="card-desc">Como gerenciar, filtrar e responder conversas no CRM com eficiência.</div>
-        </div>
-        <div class="card-footer">
-          <span class="card-meta">Tutorial em vídeo</span>
-          <div class="card-arrow">
-            <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/>
-            </svg>
-          </div>
-        </div>
-      </a>
-
-      <!-- OPORTUNIDADES (em breve) -->
-      <div class="tutorial-card coming-soon">
-        <div class="card-top">
-          <div class="card-icon">📊</div>
-          <span class="card-badge badge-soon">Em breve</span>
-        </div>
-        <div class="card-body">
-          <div class="card-title">Oportunidades</div>
-          <div class="card-desc">Pipeline de vendas, etapas do funil e gestão de oportunidades abertas.</div>
-        </div>
-        <div class="card-footer">
-          <span class="card-meta">Tutorial em vídeo</span>
-          <div class="card-arrow">
-            <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/>
-            </svg>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <span class="footer-text">© 2026 Media Growth — Todos os direitos reservados</span>
-    <div class="footer-dot"></div>
-  </footer>
+  <span class="footer">Tutoriais CRM</span>
 
 </body>
 </html>
