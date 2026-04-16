@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tutoriais — Conversas</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #0f0f0f;
+    color: #e8e8e8;
+    min-height: 100vh;
+    padding: 32px 24px;
+  }
+
+  .header {
+    margin-bottom: 24px;
+  }
+
+  .header h1 {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #666;
+  }
+
+  .header p {
+    font-size: 22px;
+    font-weight: 600;
+    color: #f0f0f0;
+    margin-top: 4px;
+  }
+
+  .layout {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 20px;
+    align-items: flex-start;
+    max-width: 1100px;
+  }
+
+  .player-col {}
+
+  .ratio {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%;
+    background: #1a1a1a;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #222;
+  }
+
+  .ratio iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border: none;
+  }
+
+  .now-info {
+    margin-top: 16px;
+    padding: 0 2px;
+  }
+
+  .now-title {
+    font-size: 17px;
+    font-weight: 600;
+    color: #f0f0f0;
+    line-height: 1.4;
+  }
+
+  .now-tag {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #888;
+    background: #1e1e1e;
+    border: 1px solid #2a2a2a;
+    border-radius: 4px;
+    padding: 3px 8px;
+  }
+
+  .navrow {
+    display: flex;
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  .navrow button {
+    padding: 9px 18px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 8px;
+    border: 1px solid #2a2a2a;
+    background: #181818;
+    color: #ccc;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+  }
+
+  .navrow button:hover {
+    background: #222;
+    color: #f0f0f0;
+    border-color: #333;
+  }
+
+  .navrow button:disabled {
+    opacity: 0.3;
+    cursor: default;
+  }
+
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .sidebar-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #444;
+    padding: 0 4px;
+    margin-bottom: 6px;
+  }
+
+  .item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid #1e1e1e;
+    background: #141414;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+  }
+
+  .item:hover {
+    background: #1c1c1c;
+    border-color: #2a2a2a;
+  }
+
+  .item.active {
+    background: #1c1c1c;
+    border-color: #333;
+  }
+
+  .item-num {
+    font-size: 12px;
+    font-weight: 600;
+    color: #3a3a3a;
+    padding-top: 2px;
+    flex-shrink: 0;
+    width: 16px;
+  }
+
+  .item.active .item-num {
+    color: #666;
+  }
+
+  .item-icon {
+    width: 44px;
+    height: 30px;
+    flex-shrink: 0;
+    border-radius: 5px;
+    background: #1e1e1e;
+    border: 1px solid #252525;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .item-icon::after {
+    content: '';
+    width: 0; height: 0;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 9px solid #444;
+    margin-left: 2px;
+  }
+
+  .item.active .item-icon::after {
+    border-left-color: #aaa;
+  }
+
+  .item-meta { flex: 1; min-width: 0; }
+
+  .item-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: #aaa;
+    line-height: 1.4;
+  }
+
+  .item.active .item-title { color: #f0f0f0; }
+
+  .item-sub {
+    font-size: 11px;
+    color: #444;
+    margin-top: 3px;
+  }
+
+  .item.active .item-sub { color: #555; }
+
+  @media (max-width: 700px) {
+    .layout { grid-template-columns: 1fr; }
+    body { padding: 20px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Tutoriais CRM</h1>
+  <p>Conversas</p>
+</div>
+
+<div class="layout">
+  <div class="player-col">
+    <div class="ratio">
+      <iframe id="frame" src="https://www.loom.com/embed/1daf511e0a6a4ee7ac9dd1832b0d2c67" allowfullscreen allow="autoplay"></iframe>
+    </div>
+    <div class="now-info">
+      <p class="now-title" id="ntitle">Gerenciando Leads pelo Aplicativo CRM [Whatsapp]</p>
+      <span class="now-tag" id="nsub">Conversas · Mobile</span>
+    </div>
+    <div class="navrow">
+      <button id="bprev" onclick="go(-1)" disabled>← Anterior</button>
+      <button id="bnext" onclick="go(1)">Próximo →</button>
+    </div>
+  </div>
+
+  <div class="sidebar">
+    <p class="sidebar-label">Playlist</p>
+    <div id="list"></div>
+  </div>
+</div>
+
+<script>
+const vids = [
+  { id: "1daf511e0a6a4ee7ac9dd1832b0d2c67", title: "Gerenciando Leads pelo Aplicativo CRM [Whatsapp]", sub: "Conversas · Mobile" },
+  { id: "2d6c7059daa24395bf535e1397d0e127", title: "Gerenciando Leads pelo WhatsApp API", sub: "Conversas · Desktop" },
+  { id: "2ead5898063e4cdba28146ffbf17ced8", title: "WhatsApp não Oficial x WhatsApp API", sub: "Conversas · Desktop" },
+];
+
+let cur = 0;
+
+function render() {
+  const list = document.getElementById("list");
+  list.innerHTML = "";
+  vids.forEach((v, i) => {
+    const d = document.createElement("div");
+    d.className = "item" + (i === cur ? " active" : "");
+    d.innerHTML = `
+      <span class="item-num">${i + 1}</span>
+      <div class="item-icon"></div>
+      <div class="item-meta">
+        <p class="item-title">${v.title}</p>
+        <p class="item-sub">${v.sub}</p>
+      </div>`;
+    d.onclick = () => { cur = i; load(); };
+    list.appendChild(d);
+  });
+}
+
+function load() {
+  const v = vids[cur];
+  document.getElementById("frame").src = "https://www.loom.com/embed/" + v.id;
+  document.getElementById("ntitle").textContent = v.title;
+  document.getElementById("nsub").textContent = v.sub;
+  document.getElementById("bprev").disabled = cur === 0;
+  document.getElementById("bnext").disabled = cur === vids.length - 1;
+  render();
+}
+
+function go(d) { cur = Math.max(0, Math.min(vids.length - 1, cur + d)); load(); }
+
+render();
+</script>
+
+</body>
+</html>
