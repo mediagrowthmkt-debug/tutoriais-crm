@@ -1,0 +1,621 @@
+
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: transparent; font-family: 'DM Sans', sans-serif; color: #f0ede6; }
+  :root {
+    --bg-deep: #0a0a0a;
+    --bg-card: #131313;
+    --bg-card2: #1a1a1a;
+    --bg-surface: #222222;
+    --orange: #E86B2A;
+    --orange-light: #F08040;
+    --orange-dark: #C4551A;
+    --orange-muted: rgba(232, 107, 42, 0.15);
+    --white: #f0ede6;
+    --gray: #888880;
+    --gray-light: #aaa89e;
+    --border: rgba(255,255,255,0.07);
+    --border-orange: rgba(232, 107, 42, 0.3);
+  }
+
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Barlow:wght@700;800;900&display=swap');
+
+  .ds-root {
+    background: var(--bg-deep);
+    min-height: 100vh;
+    padding: 32px 24px;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .ds-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 40px;
+    padding-bottom: 24px;
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  .logo-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg-card);
+    border: 0.5px solid var(--border-orange);
+    border-radius: 8px;
+    padding: 8px 14px;
+  }
+
+  .logo-dot {
+    width: 10px; height: 10px;
+    background: var(--orange);
+    border-radius: 50%;
+    box-shadow: 0 0 0 3px var(--orange-muted);
+  }
+
+  .logo-text {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--white);
+    letter-spacing: -0.3px;
+  }
+
+  .ds-title {
+    font-size: 13px;
+    color: var(--gray);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .section {
+    margin-bottom: 36px;
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 14px;
+  }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  .grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 8px; }
+
+  /* COLORS */
+  .color-card {
+    border-radius: 8px;
+    overflow: hidden;
+    border: 0.5px solid var(--border);
+  }
+  .color-swatch {
+    height: 52px;
+    width: 100%;
+  }
+  .color-info {
+    background: var(--bg-card);
+    padding: 8px 10px;
+  }
+  .color-name {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: 2px;
+  }
+  .color-hex {
+    font-size: 11px;
+    color: var(--gray);
+    font-family: monospace;
+  }
+
+  /* TYPOGRAPHY */
+  .type-sample {
+    background: var(--bg-card);
+    border: 0.5px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 10px;
+  }
+  .type-meta {
+    font-size: 11px;
+    color: var(--gray);
+    margin-top: 6px;
+    font-family: monospace;
+  }
+  .t-hero { font-family: 'Barlow', sans-serif; font-weight: 900; font-size: 36px; color: var(--white); line-height: 1.05; letter-spacing: -0.5px; text-transform: uppercase; }
+  .t-hero span { color: var(--orange); }
+  .t-heading { font-family: 'Barlow', sans-serif; font-weight: 700; font-size: 22px; color: var(--white); letter-spacing: -0.3px; text-transform: uppercase; }
+  .t-sub { font-size: 14px; color: var(--gray-light); line-height: 1.6; }
+  .t-label { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--orange); }
+  .t-body { font-size: 14px; color: var(--white); line-height: 1.65; }
+
+  /* SPACING */
+  .spacing-row { display: flex; align-items: flex-end; gap: 12px; flex-wrap: wrap; }
+  .spacing-block {
+    background: var(--orange-muted);
+    border: 0.5px solid var(--border-orange);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding-bottom: 6px;
+  }
+  .spacing-label { font-size: 11px; color: var(--orange); text-align: center; }
+
+  /* COMPONENTS */
+  .comp-card {
+    background: var(--bg-card);
+    border: 0.5px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+  }
+  .comp-label {
+    font-size: 11px;
+    color: var(--gray);
+    margin-bottom: 12px;
+    font-family: monospace;
+    letter-spacing: 0.05em;
+  }
+
+  /* Buttons */
+  .btn-primary {
+    background: var(--orange);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 20px;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+  }
+  .btn-secondary {
+    background: transparent;
+    color: var(--white);
+    border: 1px solid var(--white);
+    border-radius: 6px;
+    padding: 10px 20px;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+  }
+  .btn-ghost {
+    background: transparent;
+    color: var(--orange);
+    border: none;
+    padding: 6px 0;
+    font-size: 13px;
+    font-weight: 500;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  /* Nav dot */
+  .nav-dots {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+  }
+  .nav-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+  }
+  .nav-dot.active {
+    width: 10px; height: 10px;
+    background: var(--orange);
+    box-shadow: 0 0 0 3px var(--orange-muted);
+  }
+  .nav-item {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: var(--orange);
+    text-transform: uppercase;
+    writing-mode: horizontal-tb;
+  }
+
+  /* Numbered badge */
+  .num-badge {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: var(--orange-muted);
+    border: 1.5px solid var(--orange);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--orange);
+    font-family: 'Barlow', sans-serif;
+  }
+
+  /* Card dark */
+  .content-card {
+    background: var(--bg-card2);
+    border: 0.5px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+  }
+
+  /* Tag */
+  .tag-orange {
+    display: inline-block;
+    background: var(--orange-muted);
+    border: 0.5px solid var(--border-orange);
+    border-radius: 4px;
+    padding: 3px 10px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--orange);
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+
+  /* Globe effect (simplified) */
+  .globe-hint {
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #1a3a5c, #0a1520);
+    border: 0.5px solid rgba(100,180,255,0.2);
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .globe-glow {
+    position: absolute;
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: rgba(255, 160, 80, 0.6);
+    top: 30%; left: 30%;
+    filter: blur(8px);
+  }
+
+  /* UX patterns */
+  .ux-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: flex-start; }
+  .ux-pill {
+    background: var(--bg-surface);
+    border: 0.5px solid var(--border);
+    border-radius: 6px;
+    padding: 8px 14px;
+    font-size: 12px;
+    color: var(--gray-light);
+  }
+
+  hr.divider {
+    border: none;
+    border-top: 0.5px solid var(--border);
+    margin: 8px 0 20px;
+  }
+
+  .code-tag {
+    font-family: monospace;
+    font-size: 11px;
+    background: var(--bg-surface);
+    border: 0.5px solid var(--border);
+    border-radius: 4px;
+    padding: 2px 7px;
+    color: var(--orange-light);
+  }
+
+  .full-card {
+    background: var(--bg-card);
+    border: 0.5px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .full-card-header {
+    background: var(--bg-surface);
+    padding: 10px 16px;
+    border-bottom: 0.5px solid var(--border);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--gray);
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+  .full-card-body { padding: 20px; }
+</style>
+
+<div class="ds-root">
+
+  <!-- HEADER -->
+  <div class="ds-header">
+    <div class="logo-badge">
+      <div class="logo-dot"></div>
+      <span class="logo-text">mediagr<span style="color:var(--orange)">o</span>wth</span>
+    </div>
+    <div>
+      <div style="font-size:16px;font-weight:600;color:var(--white);margin-bottom:2px;">Design System</div>
+      <div class="ds-title">Guia visual para sites & apps</div>
+    </div>
+  </div>
+
+  <!-- PALETA DE CORES -->
+  <div class="section">
+    <div class="section-label">Paleta de Cores</div>
+    <div class="grid-4">
+      <div class="color-card">
+        <div class="color-swatch" style="background:#0a0a0a;border-bottom:0.5px solid #222;"></div>
+        <div class="color-info">
+          <div class="color-name">Black Deep</div>
+          <div class="color-hex">#0A0A0A — fundo principal</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background:#131313;border-bottom:0.5px solid #222;"></div>
+        <div class="color-info">
+          <div class="color-name">Surface Dark</div>
+          <div class="color-hex">#131313 — cards</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background:#E86B2A;"></div>
+        <div class="color-info">
+          <div class="color-name">Brand Orange</div>
+          <div class="color-hex">#E86B2A — cor primária</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background:#f0ede6;border-bottom:0.5px solid #ddd;"></div>
+        <div class="color-info">
+          <div class="color-name">Off White</div>
+          <div class="color-hex">#F0EDE6 — texto</div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:10px;" class="grid-4">
+      <div class="color-card">
+        <div class="color-swatch" style="background:rgba(232,107,42,0.15);border-bottom:0.5px solid rgba(232,107,42,0.2);"></div>
+        <div class="color-info">
+          <div class="color-name">Orange Muted</div>
+          <div class="color-hex">rgba(232,107,42,0.15) — badges</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background:#222222;border-bottom:0.5px solid #333;"></div>
+        <div class="color-info">
+          <div class="color-name">Surface Mid</div>
+          <div class="color-hex">#222222 — superfície hover</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background:#888880;"></div>
+        <div class="color-info">
+          <div class="color-name">Gray Muted</div>
+          <div class="color-hex">#888880 — textos secundários</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background:linear-gradient(135deg,#0e1e30 0%,#152840 50%,#0d1525 100%);"></div>
+        <div class="color-info">
+          <div class="color-name">Globe Blue</div>
+          <div class="color-hex">Gradiente hero visual</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIPOGRAFIA -->
+  <div class="section">
+    <div class="section-label">Tipografia</div>
+
+    <div class="type-sample">
+      <div class="t-label">Eyebrow / Label</div>
+      <div class="type-meta">Barlow 900 uppercase · 36–64px · Hero headlines</div>
+    </div>
+
+    <div class="type-sample">
+      <div class="t-hero">Cresça. <span>Lucre.</span> Valorize.</div>
+      <div class="type-meta">Barlow Black 900 · UPPERCASE · Headline hero</div>
+    </div>
+
+    <div class="type-sample">
+      <div class="t-heading">O Marketing que constrói empresas valiosas.</div>
+      <div class="type-meta">Barlow Bold 700 · UPPERCASE · Section heading</div>
+    </div>
+
+    <div class="type-sample">
+      <div class="t-sub">Atuação completa e integrada em todos os pontos de contato do seu negócio. Resultados reais com total transparência.</div>
+      <div class="type-meta">DM Sans 400 · 14–16px · Subtítulos e body</div>
+    </div>
+
+    <div class="type-sample">
+      <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;">
+        <span class="tag-orange">Plano de Estruturação</span>
+        <span style="font-size:13px;color:var(--orange);font-weight:600;letter-spacing:0.08em;text-transform:uppercase;">Serviços 360°</span>
+        <span style="font-size:13px;color:var(--gray-light);">Em <span style="color:var(--orange);font-weight:600;">47 dias</span></span>
+      </div>
+      <div class="type-meta">Labels, eyebrows e destaques inline</div>
+    </div>
+  </div>
+
+  <!-- COMPONENTES -->
+  <div class="section">
+    <div class="section-label">Componentes</div>
+    <div class="grid-2">
+
+      <!-- Botões -->
+      <div class="comp-card">
+        <div class="comp-label">buttons</div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <button class="btn-primary">Entrar em Contato</button>
+          <button class="btn-secondary">Sobre Nós</button>
+          <button class="btn-ghost">Conheça mais ↓</button>
+        </div>
+      </div>
+
+      <!-- Navegação lateral -->
+      <div class="comp-card">
+        <div class="comp-label">side-nav (dot nav)</div>
+        <div style="display:flex;gap:16px;align-items:center;">
+          <div class="nav-dots">
+            <span class="nav-item" style="margin-bottom:4px;font-size:9px;">INÍCIO</span>
+            <div class="nav-dot active"></div>
+            <div class="nav-dot"></div>
+            <div class="nav-dot"></div>
+            <div class="nav-dot"></div>
+          </div>
+          <div style="flex:1;">
+            <div style="font-size:12px;color:var(--gray);line-height:1.7;">Navegação lateral com dots — posição na página. Ativo = laranja com glow. Inativo = branco 20% opacidade. Labels giradas verticalmente.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Numbered badge -->
+      <div class="comp-card">
+        <div class="comp-label">numbered-badge + list item</div>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div class="num-badge">1</div>
+            <div>
+              <div style="font-size:13px;font-weight:600;color:var(--white);">Gestão inteligente</div>
+              <div style="font-size:12px;color:var(--gray);">do marketing</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div class="num-badge">4</div>
+            <div>
+              <div style="font-size:13px;font-weight:600;color:var(--white);">Atendimento com IA</div>
+              <div style="font-size:12px;color:var(--gray);">automação e CRM</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Content card -->
+      <div class="comp-card">
+        <div class="comp-label">content-card (dark surface)</div>
+        <div class="content-card">
+          <div class="t-label" style="margin-bottom:8px;">Plano de Estruturação</div>
+          <div style="font-size:22px;font-weight:700;color:var(--white);margin-bottom:6px;font-family:'Barlow',sans-serif;text-transform:uppercase;">Semana 1</div>
+          <div style="font-size:13px;color:var(--gray);">Diagnóstico e auditoria</div>
+          <div style="margin-top:12px;display:flex;align-items:center;gap:8px;">
+            <div style="flex:1;height:3px;background:var(--bg-surface);border-radius:2px;overflow:hidden;">
+              <div style="width:0%;height:100%;background:var(--orange);border-radius:2px;"></div>
+            </div>
+            <span style="font-size:11px;color:var(--gray);">0/15</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- UX PATTERNS -->
+  <div class="section">
+    <div class="section-label">Padrões UX</div>
+    <div class="full-card">
+      <div class="full-card-header">Layout & Interação</div>
+      <div class="full-card-body" style="display:flex;flex-direction:column;gap:16px;">
+
+        <div>
+          <div style="font-size:12px;font-weight:600;color:var(--gray);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.08em;">Scroll nav fullscreen sections</div>
+          <div class="ux-row">
+            <div class="ux-pill">100vh por seção</div>
+            <div class="ux-pill">Scroll snapping</div>
+            <div class="ux-pill">Dot nav lateral direita</div>
+            <div class="ux-pill">Hero fullscreen + background visual</div>
+          </div>
+        </div>
+
+        <hr class="divider">
+
+        <div>
+          <div style="font-size:12px;font-weight:600;color:var(--gray);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.08em;">Background hero</div>
+          <div style="display:flex;gap:12px;align-items:center;">
+            <div class="globe-hint"><div class="globe-glow"></div></div>
+            <div style="flex:1;">
+              <div class="ux-row">
+                <div class="ux-pill">Globo 3D iluminado</div>
+                <div class="ux-pill">Partículas douradas</div>
+                <div class="ux-pill">Fundo #0A0A0A quase preto</div>
+              </div>
+              <div style="margin-top:8px;font-size:12px;color:var(--gray);">Luz quente (amber/laranja) no lado inferior esquerdo do globo. Efeito de "cidades iluminadas". Transmite globalidade e tecnologia.</div>
+            </div>
+          </div>
+        </div>
+
+        <hr class="divider">
+
+        <div>
+          <div style="font-size:12px;font-weight:600;color:var(--gray);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.08em;">Chat widget / CTA flutuante</div>
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div style="width:44px;height:44px;border-radius:50%;overflow:hidden;border:1.5px solid var(--orange);flex-shrink:0;background:var(--bg-surface);"></div>
+            <div style="background:var(--orange);border-radius:6px;padding:8px 14px;font-size:12px;font-weight:600;color:#fff;">estamos online ✕</div>
+          </div>
+          <div style="margin-top:8px;font-size:12px;color:var(--gray);">Avatar circular com borda laranja. Pill flutuante no canto inferior esquerdo. CTA direto: "clique aqui para falar conosco".</div>
+        </div>
+
+        <hr class="divider">
+
+        <div>
+          <div style="font-size:12px;font-weight:600;color:var(--gray);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.08em;">Texto com destaque inline</div>
+          <div style="font-size:14px;color:var(--white);line-height:1.65;">
+            Em <span style="color:var(--orange);font-weight:600;">47 dias</span>, você terá acesso ao nosso <span style="color:var(--orange);font-weight:600;">CRM</span> e <span style="color:var(--orange);font-weight:600;text-transform:uppercase;letter-spacing:0.03em;">DASHBOARD</span> para gestão de metas.
+          </div>
+          <div style="margin-top:8px;font-size:12px;color:var(--gray);">Números e palavras-chave em laranja bold dentro do corpo do texto. Resto em off-white normal.</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- TOKENS RÁPIDOS -->
+  <div class="section">
+    <div class="section-label">Tokens de Referência</div>
+    <div class="grid-2">
+      <div class="comp-card">
+        <div class="comp-label">border-radius</div>
+        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:4px;">
+          <div style="width:28px;height:28px;background:var(--orange-muted);border:0.5px solid var(--border-orange);border-radius:4px;"></div><span style="font-size:11px;color:var(--gray);">4px · botões</span>
+          <div style="width:28px;height:28px;background:var(--orange-muted);border:0.5px solid var(--border-orange);border-radius:8px;"></div><span style="font-size:11px;color:var(--gray);">8px · cards</span>
+          <div style="width:28px;height:28px;background:var(--orange-muted);border:0.5px solid var(--border-orange);border-radius:14px;"></div><span style="font-size:11px;color:var(--gray);">14px · containers</span>
+          <div style="width:28px;height:28px;background:var(--orange-muted);border:0.5px solid var(--border-orange);border-radius:50%;"></div><span style="font-size:11px;color:var(--gray);">50% · avatares/badges</span>
+        </div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-label">borders</div>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px;">
+          <div style="height:20px;border:0.5px solid rgba(255,255,255,0.07);border-radius:4px;display:flex;align-items:center;padding:0 8px;"><span style="font-size:11px;color:var(--gray);">0.5px border padrão</span></div>
+          <div style="height:20px;border:0.5px solid rgba(232,107,42,0.3);border-radius:4px;display:flex;align-items:center;padding:0 8px;"><span style="font-size:11px;color:var(--orange);">0.5px border laranja (ativo/destaque)</span></div>
+          <div style="height:20px;border:1.5px solid var(--orange);border-radius:50px;display:flex;align-items:center;padding:0 8px;"><span style="font-size:11px;color:var(--orange);">1.5px sólido (avatar)</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MOOD / DIREÇÃO CRIATIVA -->
+  <div class="section">
+    <div class="section-label">Direção Criativa</div>
+    <div class="comp-card">
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <span class="tag-orange">Dark Premium</span>
+        <span class="tag-orange">Tech Global</span>
+        <span class="tag-orange">Laranja como autoridade</span>
+        <span class="tag-orange">Quase preto = sofisticação</span>
+        <span class="tag-orange">Uppercase = força</span>
+        <span class="tag-orange">Tipografia pesada + corpo limpo</span>
+        <span class="tag-orange">Mínimo de branco, máximo de contraste</span>
+      </div>
+      <div style="margin-top:14px;font-size:13px;color:var(--gray-light);line-height:1.65;">
+        O visual da Mediagrowth comunica <span style="color:var(--white);">agência de resultado</span>, não agência criativa. Fundo escuro quase negro + laranja vibrante criam a combinação de <span style="color:var(--white);">seriedade + energia</span>. A Barlow pesada em maiúsculas dá impacto. O globo iluminado conecta com a ideia de visão 360° e alcance digital.
+      </div>
+    </div>
+  </div>
+
+</div>

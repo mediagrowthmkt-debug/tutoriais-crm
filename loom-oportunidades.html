@@ -11,8 +11,8 @@
 
   body {
     font-family: 'DM Sans', sans-serif;
-    background: #0f0f0f;
-    color: #e8e8e8;
+    background: #EEF2F7;
+    color: #1a1a1a;
     min-height: 100vh;
     min-height: 100dvh;
     padding: 28px 20px 40px;
@@ -27,13 +27,13 @@
     font-weight: 500;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: #555;
+    color: #999;
   }
 
   .header p {
     font-size: 24px;
     font-weight: 600;
-    color: #f0f0f0;
+    color: #111;
     margin-top: 4px;
   }
 
@@ -57,11 +57,13 @@
     border: 1px solid #222;
   }
 
-  .ratio iframe {
+  .ratio iframe,
+  .ratio img {
     position: absolute;
     top: 0; left: 0;
     width: 100%; height: 100%;
     border: none;
+    object-fit: cover;
   }
 
   .now-info {
@@ -72,7 +74,7 @@
   .now-title {
     font-size: 18px;
     font-weight: 600;
-    color: #f0f0f0;
+    color: #111;
     line-height: 1.4;
   }
 
@@ -83,9 +85,9 @@
     font-weight: 500;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: #888;
-    background: #1e1e1e;
-    border: 1px solid #2a2a2a;
+    color: #666;
+    background: #e2e8f0;
+    border: 1px solid #d0d7e3;
     border-radius: 4px;
     padding: 3px 9px;
   }
@@ -102,18 +104,18 @@
     font-size: 14px;
     font-weight: 500;
     border-radius: 9px;
-    border: 1px solid #2a2a2a;
-    background: #181818;
-    color: #ccc;
+    border: 1px solid #d0d7e3;
+    background: #ffffff;
+    color: #444;
     cursor: pointer;
     transition: background 0.15s, color 0.15s, border-color 0.15s;
     -webkit-tap-highlight-color: transparent;
   }
 
   .navrow button:hover, .navrow button:active {
-    background: #222;
-    color: #f0f0f0;
-    border-color: #333;
+    background: #e2e8f0;
+    color: #111;
+    border-color: #bbc4d0;
   }
 
   .navrow button:disabled {
@@ -132,7 +134,7 @@
     font-weight: 500;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: #444;
+    color: #999;
     padding: 0 4px;
     margin-bottom: 6px;
   }
@@ -143,75 +145,97 @@
     gap: 12px;
     padding: 13px 14px;
     border-radius: 10px;
-    border: 1px solid #1e1e1e;
-    background: #141414;
+    border: 1px solid #dde3ec;
+    background: #ffffff;
     cursor: pointer;
     transition: background 0.15s, border-color 0.15s;
     -webkit-tap-highlight-color: transparent;
   }
 
   .item:hover, .item:active {
-    background: #1c1c1c;
-    border-color: #2a2a2a;
+    background: #f4f7fb;
+    border-color: #c8d1de;
   }
 
   .item.active {
-    background: #1c1c1c;
-    border-color: #333;
+    background: #f0f4fa;
+    border-color: #b8c4d4;
   }
 
   .item-num {
     font-size: 12px;
     font-weight: 600;
-    color: #3a3a3a;
+    color: #bbb;
     padding-top: 2px;
     flex-shrink: 0;
     width: 16px;
   }
 
-  .item.active .item-num { color: #666; }
+  .item.active .item-num { color: #555; }
 
   .item-icon {
-    width: 46px;
-    height: 32px;
+    width: 56px;
+    height: 38px;
     flex-shrink: 0;
     border-radius: 5px;
-    background: #1e1e1e;
-    border: 1px solid #252525;
+    background: #dce3ed;
+    border: 1px solid #cdd5e1;
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
+    position: relative;
   }
 
+  .item-icon img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .item-icon .play-tri {
+    position: absolute;
+    width: 0; height: 0;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 9px solid rgba(255,255,255,0.85);
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.4));
+  }
+
+  /* fallback play icon when no thumbnail */
   .item-icon::after {
     content: '';
     width: 0; height: 0;
     border-top: 5px solid transparent;
     border-bottom: 5px solid transparent;
-    border-left: 9px solid #444;
+    border-left: 9px solid #a0aab8;
     margin-left: 2px;
   }
 
-  .item.active .item-icon::after { border-left-color: #aaa; }
+  .item-icon.has-thumb::after {
+    display: none;
+  }
+
+  .item.active .item-icon::after { border-left-color: #555; }
 
   .item-meta { flex: 1; min-width: 0; }
 
   .item-title {
     font-size: 14px;
     font-weight: 500;
-    color: #aaa;
+    color: #777;
     line-height: 1.4;
   }
 
-  .item.active .item-title { color: #f0f0f0; }
+  .item.active .item-title { color: #111; }
 
   .item-sub {
     font-size: 11px;
-    color: #444;
+    color: #aaa;
     margin-top: 3px;
   }
 
-  .item.active .item-sub { color: #555; }
+  .item.active .item-sub { color: #666; }
 
   /* MOBILE */
   @media (max-width: 720px) {
@@ -222,9 +246,33 @@
     .now-title { font-size: 16px; }
     .navrow button { flex: 1; text-align: center; padding: 12px 10px; }
   }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #777;
+    text-decoration: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: 1px solid #dde3ec;
+    background: #ffffff;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+    margin-bottom: 16px;
+  }
+
+  .back-link:hover {
+    background: #e2e8f0;
+    color: #111;
+    border-color: #bbc4d0;
+  }
 </style>
 </head>
 <body>
+
+<a class="back-link" href="index.html">← Voltar ao menu</a>
 
 <div class="header">
   <h1>Tutoriais CRM</h1>
@@ -233,12 +281,12 @@
 
 <div class="layout">
   <div class="player-col">
-    <div class="ratio">
+    <div class="ratio" id="player">
       <iframe id="frame" src="https://www.loom.com/embed/129b4dfc441f4cd4932fc49be8fcd5b9" allowfullscreen allow="autoplay"></iframe>
     </div>
     <div class="now-info">
       <p class="now-title" id="ntitle">Gerenciamento de Oportunidades no CRM [aplicativo]</p>
-      <span class="now-tag" id="nsub">Oportunidades · Mobile</span>
+      <span class="now-tag" id="nsub">Oportunidades · Celular</span>
     </div>
     <div class="navrow">
       <button id="bprev" onclick="go(-1)" disabled>← Anterior</button>
@@ -254,43 +302,63 @@
 
 <script>
 const vids = [
-  { id: "129b4dfc441f4cd4932fc49be8fcd5b9", title: "Gerenciamento de Oportunidades no CRM [aplicativo]", sub: "Oportunidades · Mobile" },
-  { id: "333db84841b54c5cbe41eca1b25bbbe0", title: "Gerenciamento de Oportunidades no CRM [desktop]", sub: "Oportunidades · Desktop" },
+  { id: "129b4dfc441f4cd4932fc49be8fcd5b9", title: "Gerenciamento de Oportunidades no CRM [aplicativo]", sub: "Oportunidades · Celular" },
+  { id: "333db84841b54c5cbe41eca1b25bbbe0", title: "Gerenciamento de Oportunidades no CRM [desktop]", sub: "Oportunidades · Computador" },
 ];
 
 let cur = 0;
+const playerEl = document.getElementById("player");
+const thumbCache = {};
 
-function render() {
-  const list = document.getElementById("list");
-  list.innerHTML = "";
-  vids.forEach((v, i) => {
-    const d = document.createElement("div");
-    d.className = "item" + (i === cur ? " active" : "");
-    d.innerHTML = `
-      <span class="item-num">${i + 1}</span>
-      <div class="item-icon"></div>
-      <div class="item-meta">
-        <p class="item-title">${v.title}</p>
-        <p class="item-sub">${v.sub}</p>
-      </div>`;
-    d.onclick = () => { cur = i; load(); };
-    list.appendChild(d);
-  });
+// Build playlist once
+const listEl = document.getElementById("list");
+const items = [];
+
+vids.forEach((v, i) => {
+  const d = document.createElement("div");
+  d.className = "item" + (i === 0 ? " active" : "");
+  d.innerHTML = `
+    <span class="item-num">${i + 1}</span>
+    <div class="item-icon"></div>
+    <div class="item-meta">
+      <p class="item-title">${v.title}</p>
+      <p class="item-sub">${v.sub}</p>
+    </div>`;
+  d.onclick = () => { cur = i; load(); };
+  listEl.appendChild(d);
+  items.push(d);
+});
+
+// Fetch all thumbnails via oEmbed
+Promise.all(vids.map(async (v, i) => {
+  try {
+    const r = await fetch(`https://www.loom.com/v1/oembed?url=https://www.loom.com/share/${v.id}`);
+    const data = await r.json();
+    if (data.thumbnail_url) {
+      const staticUrl = data.thumbnail_url.replace('.gif', '.jpg');
+      thumbCache[v.id] = staticUrl;
+      const icon = items[i].querySelector(".item-icon");
+      icon.classList.add("has-thumb");
+      icon.innerHTML = `<img src="${staticUrl}" alt=""><div class="play-tri"></div>`;
+    }
+  } catch(e) {}
+}));
+
+function updateActive() {
+  items.forEach((el, i) => el.classList.toggle("active", i === cur));
 }
 
 function load() {
   const v = vids[cur];
-  document.getElementById("frame").src = "https://www.loom.com/embed/" + v.id;
+  document.getElementById("frame").src = `https://www.loom.com/embed/${v.id}`;
   document.getElementById("ntitle").textContent = v.title;
   document.getElementById("nsub").textContent = v.sub;
   document.getElementById("bprev").disabled = cur === 0;
   document.getElementById("bnext").disabled = cur === vids.length - 1;
-  render();
+  updateActive();
 }
 
 function go(d) { cur = Math.max(0, Math.min(vids.length - 1, cur + d)); load(); }
-
-render();
 </script>
 
 </body>
