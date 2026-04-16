@@ -14,23 +14,24 @@
     background: #0f0f0f;
     color: #e8e8e8;
     min-height: 100vh;
-    padding: 32px 24px;
+    min-height: 100dvh;
+    padding: 28px 20px 40px;
   }
 
   .header {
-    margin-bottom: 24px;
+    margin-bottom: 22px;
   }
 
   .header h1 {
-    font-size: 13px;
+    font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: #666;
+    color: #555;
   }
 
   .header p {
-    font-size: 22px;
+    font-size: 24px;
     font-weight: 600;
     color: #f0f0f0;
     margin-top: 4px;
@@ -38,20 +39,20 @@
 
   .layout {
     display: grid;
-    grid-template-columns: 1fr 300px;
+    grid-template-columns: 1fr 320px;
     gap: 20px;
     align-items: flex-start;
-    max-width: 1100px;
+    max-width: 1140px;
   }
 
-  .player-col {}
+  .player-col { width: 100%; }
 
   .ratio {
     position: relative;
     width: 100%;
     padding-top: 56.25%;
     background: #1a1a1a;
-    border-radius: 12px;
+    border-radius: 14px;
     overflow: hidden;
     border: 1px solid #222;
   }
@@ -69,7 +70,7 @@
   }
 
   .now-title {
-    font-size: 17px;
+    font-size: 18px;
     font-weight: 600;
     color: #f0f0f0;
     line-height: 1.4;
@@ -86,29 +87,30 @@
     background: #1e1e1e;
     border: 1px solid #2a2a2a;
     border-radius: 4px;
-    padding: 3px 8px;
+    padding: 3px 9px;
   }
 
   .navrow {
     display: flex;
     gap: 10px;
-    margin-top: 16px;
+    margin-top: 18px;
   }
 
   .navrow button {
-    padding: 9px 18px;
+    padding: 11px 20px;
     font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 500;
-    border-radius: 8px;
+    border-radius: 9px;
     border: 1px solid #2a2a2a;
     background: #181818;
     color: #ccc;
     cursor: pointer;
     transition: background 0.15s, color 0.15s, border-color 0.15s;
+    -webkit-tap-highlight-color: transparent;
   }
 
-  .navrow button:hover {
+  .navrow button:hover, .navrow button:active {
     background: #222;
     color: #f0f0f0;
     border-color: #333;
@@ -139,15 +141,16 @@
     display: flex;
     align-items: flex-start;
     gap: 12px;
-    padding: 12px 14px;
+    padding: 13px 14px;
     border-radius: 10px;
     border: 1px solid #1e1e1e;
     background: #141414;
     cursor: pointer;
     transition: background 0.15s, border-color 0.15s;
+    -webkit-tap-highlight-color: transparent;
   }
 
-  .item:hover {
+  .item:hover, .item:active {
     background: #1c1c1c;
     border-color: #2a2a2a;
   }
@@ -171,8 +174,8 @@
   }
 
   .item-icon {
-    width: 44px;
-    height: 30px;
+    width: 46px;
+    height: 32px;
     flex-shrink: 0;
     border-radius: 5px;
     background: #1e1e1e;
@@ -198,7 +201,7 @@
   .item-meta { flex: 1; min-width: 0; }
 
   .item-title {
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 500;
     color: #aaa;
     line-height: 1.4;
@@ -214,9 +217,18 @@
 
   .item.active .item-sub { color: #555; }
 
-  @media (max-width: 700px) {
-    .layout { grid-template-columns: 1fr; }
-    body { padding: 20px 16px; }
+  /* MOBILE */
+  @media (max-width: 720px) {
+    body { padding: 20px 16px 48px; }
+    .header p { font-size: 20px; }
+    .layout {
+      grid-template-columns: 1fr;
+    }
+    .sidebar {
+      margin-top: 8px;
+    }
+    .now-title { font-size: 16px; }
+    .navrow button { flex: 1; text-align: center; padding: 12px 10px; }
   }
 </style>
 </head>
