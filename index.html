@@ -93,6 +93,21 @@
     font-size: 26px;
   }
 
+  .card-preview {
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 0.5px solid var(--border);
+    aspect-ratio: 16/9;
+  }
+
+  .card-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
   .card-label {
     font-size: 15px;
     font-weight: 600;
@@ -133,13 +148,17 @@
   <div class="grid">
 
     <a class="card" href="loom-conversas.html">
-      <div class="card-icon">💬</div>
+      <div class="card-preview">
+        <img src="fotos menu/conversas.png" alt="Preview Conversas">
+      </div>
       <div class="card-label">Conversas</div>
       <div class="card-sub">Ver tutorial →</div>
     </a>
 
     <a class="card" href="loom-oportunidades.html">
-      <div class="card-icon">📊</div>
+      <div class="card-preview">
+        <img src="fotos menu/oportunidades.png" alt="Preview Oportunidades">
+      </div>
       <div class="card-label">Oportunidades</div>
       <div class="card-sub">Ver tutorial →</div>
     </a>
