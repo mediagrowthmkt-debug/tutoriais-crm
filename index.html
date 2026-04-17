@@ -69,10 +69,10 @@
   /* grid */
   .grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 14px;
     width: 100%;
-    max-width: 480px;
+    max-width: 720px;
   }
 
   /* card */
@@ -132,6 +132,13 @@
     letter-spacing: 0.04em;
   }
 
+  .card-desc {
+    font-size: 11px;
+    color: #999;
+    line-height: 1.45;
+    margin-top: -6px;
+  }
+
   /* footer */
   .footer {
     font-size: 11px;
@@ -140,12 +147,50 @@
     text-transform: uppercase;
   }
 
+  /* access bar */
+  .access-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .access-bar a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #555;
+    text-decoration: none;
+    padding: 7px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    transition: border-color 0.15s, color 0.15s, background 0.15s;
+    letter-spacing: -0.1px;
+  }
+
+  .access-bar a:hover {
+    border-color: var(--border-orange);
+    color: #111;
+    background: #f8f9fb;
+  }
+
+  .access-bar a svg {
+    flex-shrink: 0;
+  }
+
   /* mobile */
-  @media (max-width: 400px) {
+  @media (max-width: 600px) {
     .grid {
       grid-template-columns: 1fr 1fr;
+      max-width: 480px;
     }
     body { gap: 40px; padding: 40px 20px; }
+    .access-bar { gap: 8px; }
+    .access-bar a { font-size: 11px; padding: 6px 10px; }
   }
 </style>
 </head>
@@ -156,6 +201,21 @@
     <span class="logo-text">Mediagrowth</span>
   </div>
 
+  <div class="access-bar">
+    <a href="http://crm.mediagrowth.com.br/" target="_blank">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+      Acessar CRM no Computador
+    </a>
+    <a href="https://apps.apple.com/br/app/lead-connector/id1564302502" target="_blank">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8.5 2 6 4.5 6 7c0 1.5.5 2.8 1.4 3.8L3 22h18l-4.4-11.2C17.5 9.8 18 8.5 18 7c0-2.5-2.5-5-6-5z"/><path d="M14.5 2.5c1 .5 2 1.5 2.5 3"/></svg>
+      Baixar App CRM no iPhone
+    </a>
+    <a href="https://play.google.com/store/apps/details?id=com.LeadConnector&hl=pt" target="_blank">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      Baixar App CRM no Android
+    </a>
+  </div>
+
   <div class="grid">
 
     <a class="card" href="loom-conversas.html">
@@ -163,6 +223,7 @@
         <img src="fotos menu/conversas.png" alt="Preview Conversas">
       </div>
       <div class="card-label">Conversas</div>
+      <div class="card-desc">Gerenciar conversas e conversar dentro do CRM</div>
       <div class="card-sub">Ver tutorial →</div>
     </a>
 
@@ -171,6 +232,7 @@
         <img src="fotos menu/oportunidades.png" alt="Preview Oportunidades">
       </div>
       <div class="card-label">Oportunidades</div>
+      <div class="card-desc">Gerenciar leads e funis de venda</div>
       <div class="card-sub">Ver tutorial →</div>
     </a>
 
@@ -179,6 +241,7 @@
         <img src="fotos menu/acesso.png" alt="Preview Acesso">
       </div>
       <div class="card-label">Acesso</div>
+      <div class="card-desc">Logins e acessos ao CRM</div>
       <div class="card-sub">Ver tutorial →</div>
     </a>
 
@@ -187,6 +250,7 @@
         <img src="fotos menu/contatos.png" alt="Preview Contatos">
       </div>
       <div class="card-label">Contatos</div>
+      <div class="card-desc">Gerenciar a base de contatos no CRM</div>
       <div class="card-sub">Ver tutorial →</div>
     </a>
 
@@ -195,6 +259,16 @@
         <img src="fotos menu/treinamentos-ao-vivo.png" alt="Preview Treinamentos Ao Vivo">
       </div>
       <div class="card-label">Treinamentos Ao Vivo</div>
+      <div class="card-desc">Ensinando a mexer ao vivo no CRM</div>
+      <div class="card-sub">Ver tutorial →</div>
+    </a>
+
+    <a class="card" href="loom-celular.html">
+      <div class="card-preview">
+        <img src="fotos menu/celular.png" alt="Preview Celular App">
+      </div>
+      <div class="card-label">Celular (App)</div>
+      <div class="card-desc">Tutoriais no aplicativo celular</div>
       <div class="card-sub">Ver tutorial →</div>
     </a>
 

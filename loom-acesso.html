@@ -238,6 +238,21 @@
     font-size: 11px;
     color: #aaa;
     margin-top: 3px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .item-sub .badge-platform {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    color: #fff;
+    background: #111;
+    padding: 1px 7px;
+    border-radius: 4px;
+    letter-spacing: 0.02em;
+    line-height: 1.6;
   }
 
   .item.active .item-sub { color: #666; }
@@ -319,12 +334,15 @@ const items = [];
 vids.forEach((v, i) => {
   const d = document.createElement("div");
   d.className = "item" + (i === 0 ? " active" : "");
+  const parts = v.sub.split(" · ");
+  const category = parts[0] || "";
+  const platform = parts[1] || "";
   d.innerHTML = `
     <span class="item-num">${i + 1}</span>
     <div class="item-icon"></div>
     <div class="item-meta">
       <p class="item-title">${v.title}</p>
-      <p class="item-sub">${v.sub}</p>
+      <p class="item-sub"><span class="badge-platform">${platform}</span>${category}</p>
     </div>`;
   d.onclick = () => { cur = i; load(); };
   listEl.appendChild(d);

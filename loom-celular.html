@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Treinamento CRM — Oportunidades</title>
-<meta name="description" content="Tutoriais de Oportunidades do CRM. Aprenda a gerenciar oportunidades pelo aplicativo e computador.">
+<title>Treinamento CRM — Celular</title>
+<meta name="description" content="Tutoriais do CRM para o aplicativo celular. Aprenda a gerenciar leads e oportunidades pelo app.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://treinamento.mediagrowth.com.br/loom-oportunidades.html">
-<meta property="og:title" content="Treinamento CRM — Oportunidades">
-<meta property="og:description" content="Tutoriais de Oportunidades do CRM. Aprenda a gerenciar oportunidades pelo aplicativo e computador.">
-<meta property="og:image" content="https://treinamento.mediagrowth.com.br/fotos%20menu/oportunidades.png">
+<meta property="og:url" content="https://treinamento.mediagrowth.com.br/loom-celular.html">
+<meta property="og:title" content="Treinamento CRM — Celular">
+<meta property="og:description" content="Tutoriais do CRM para o aplicativo celular. Aprenda a gerenciar leads e oportunidades pelo app.">
+<meta property="og:image" content="https://treinamento.mediagrowth.com.br/fotos%20menu/celular.png">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap');
 
@@ -70,6 +70,34 @@
     width: 100%; height: 100%;
     border: none;
     object-fit: cover;
+  }
+
+  .ratio .play-btn {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 68px; height: 68px;
+    background: rgba(0,0,0,0.55);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+
+  .ratio .play-btn:hover {
+    background: rgba(0,0,0,0.75);
+  }
+
+  .ratio .play-btn::after {
+    content: '';
+    width: 0; height: 0;
+    border-top: 12px solid transparent;
+    border-bottom: 12px solid transparent;
+    border-left: 20px solid #fff;
+    margin-left: 4px;
   }
 
   .now-info {
@@ -208,7 +236,6 @@
     filter: drop-shadow(0 1px 2px rgba(0,0,0,0.4));
   }
 
-  /* fallback play icon when no thumbnail */
   .item-icon::after {
     content: '';
     width: 0; height: 0;
@@ -239,21 +266,6 @@
     font-size: 11px;
     color: #aaa;
     margin-top: 3px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-
-  .item-sub .badge-platform {
-    display: inline-block;
-    font-size: 10px;
-    font-weight: 600;
-    color: #fff;
-    background: #111;
-    padding: 1px 7px;
-    border-radius: 4px;
-    letter-spacing: 0.02em;
-    line-height: 1.6;
   }
 
   .item.active .item-sub { color: #666; }
@@ -297,17 +309,17 @@
 
 <div class="header">
   <h1>Tutoriais CRM</h1>
-  <p>Oportunidades</p>
+  <p>Celular (App)</p>
 </div>
 
 <div class="layout">
   <div class="player-col">
     <div class="ratio" id="player">
-      <iframe id="frame" src="https://www.loom.com/embed/333db84841b54c5cbe41eca1b25bbbe0" allowfullscreen allow="autoplay"></iframe>
+      <iframe id="frame" src="https://www.loom.com/embed/1daf511e0a6a4ee7ac9dd1832b0d2c67" allowfullscreen allow="autoplay"></iframe>
     </div>
     <div class="now-info">
-      <p class="now-title" id="ntitle">Gerenciamento de Oportunidades no CRM [desktop]</p>
-      <span class="now-tag" id="nsub">Oportunidades · Computador</span>
+      <p class="now-title" id="ntitle">Gerenciando Leads pelo Aplicativo CRM [Whatsapp]</p>
+      <span class="now-tag" id="nsub">Conversas · Celular</span>
     </div>
     <div class="navrow">
       <button id="bprev" onclick="go(-1)" disabled>← Anterior</button>
@@ -323,17 +335,14 @@
 
 <script>
 const vids = [
-  { id: "333db84841b54c5cbe41eca1b25bbbe0", title: "Gerenciamento de Oportunidades no CRM [desktop]", sub: "Oportunidades · Computador" },
-  { id: "d25a9752665b449395cbbcaa11dfd27d", title: "Como ajustar o valor do lead", sub: "Oportunidades · Computador" },
-  { id: "9b66dc83203e42638a38f995b86a9f09", title: "Como apagar leads da pipeline/funil", sub: "Oportunidades · Computador" },
-  { id: "2ab8c43840b74967bf88f804507f7de4", title: "Como classificar leads em ABERTO como PERDIDO, GANHO ou ABANDONADO", sub: "Oportunidades · Computador" },
+  { id: "1daf511e0a6a4ee7ac9dd1832b0d2c67", title: "Gerenciando Leads pelo Aplicativo CRM [Whatsapp]", sub: "Conversas · Celular" },
+  { id: "129b4dfc441f4cd4932fc49be8fcd5b9", title: "Gerenciamento de Oportunidades no CRM [aplicativo]", sub: "Oportunidades · Celular" },
 ];
 
 let cur = 0;
 const playerEl = document.getElementById("player");
 const thumbCache = {};
 
-// Build playlist once
 const listEl = document.getElementById("list");
 const items = [];
 
@@ -342,20 +351,18 @@ vids.forEach((v, i) => {
   d.className = "item" + (i === 0 ? " active" : "");
   const parts = v.sub.split(" · ");
   const category = parts[0] || "";
-  const platform = parts[1] || "";
   d.innerHTML = `
     <span class="item-num">${i + 1}</span>
     <div class="item-icon"></div>
     <div class="item-meta">
       <p class="item-title">${v.title}</p>
-      <p class="item-sub"><span class="badge-platform">${platform}</span>${category}</p>
+      <p class="item-sub">${category}</p>
     </div>`;
   d.onclick = () => { cur = i; load(); };
   listEl.appendChild(d);
   items.push(d);
 });
 
-// Fetch all thumbnails via oEmbed
 Promise.all(vids.map(async (v, i) => {
   try {
     const r = await fetch(`https://www.loom.com/v1/oembed?url=https://www.loom.com/share/${v.id}`);

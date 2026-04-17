@@ -271,6 +271,21 @@
     font-size: 11px;
     color: #aaa;
     margin-top: 3px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .item-sub .badge-platform {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    color: #fff;
+    background: #111;
+    padding: 1px 7px;
+    border-radius: 4px;
+    letter-spacing: 0.02em;
+    line-height: 1.6;
   }
 
   .item.active .item-sub { color: #666; }
@@ -324,11 +339,11 @@
 <div class="layout">
   <div class="player-col">
     <div class="ratio" id="player">
-      <iframe id="frame" src="https://www.loom.com/embed/1daf511e0a6a4ee7ac9dd1832b0d2c67" allowfullscreen allow="autoplay"></iframe>
+      <iframe id="frame" src="https://www.loom.com/embed/2d6c7059daa24395bf535e1397d0e127" allowfullscreen allow="autoplay"></iframe>
     </div>
     <div class="now-info">
-      <p class="now-title" id="ntitle">Gerenciando Leads pelo Aplicativo CRM [Whatsapp]</p>
-      <span class="now-tag" id="nsub">Conversas · Celular</span>
+      <p class="now-title" id="ntitle">Gerenciando Leads pelo WhatsApp API</p>
+      <span class="now-tag" id="nsub">Conversas · Computador</span>
     </div>
     <div class="navrow">
       <button id="bprev" onclick="go(-1)" disabled>← Anterior</button>
@@ -344,7 +359,6 @@
 
 <script>
 const vids = [
-  { id: "1daf511e0a6a4ee7ac9dd1832b0d2c67", title: "Gerenciando Leads pelo Aplicativo CRM [Whatsapp]", sub: "Conversas · Celular" },
   { id: "2d6c7059daa24395bf535e1397d0e127", title: "Gerenciando Leads pelo WhatsApp API", sub: "Conversas · Computador" },
   { id: "2ead5898063e4cdba28146ffbf17ced8", title: "WhatsApp não Oficial x WhatsApp API", sub: "Conversas · Computador" },
 ];
@@ -360,12 +374,15 @@ const items = [];
 vids.forEach((v, i) => {
   const d = document.createElement("div");
   d.className = "item" + (i === 0 ? " active" : "");
+  const parts = v.sub.split(" · ");
+  const category = parts[0] || "";
+  const platform = parts[1] || "";
   d.innerHTML = `
     <span class="item-num">${i + 1}</span>
     <div class="item-icon"></div>
     <div class="item-meta">
       <p class="item-title">${v.title}</p>
-      <p class="item-sub">${v.sub}</p>
+      <p class="item-sub"><span class="badge-platform">${platform}</span>${category}</p>
     </div>`;
   d.onclick = () => { cur = i; load(); };
   listEl.appendChild(d);
